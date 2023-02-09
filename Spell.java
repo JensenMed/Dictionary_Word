@@ -45,8 +45,13 @@ public class Spell {
 			
 			// if contains ! then leave be (it's in dictionary) else pass to substitution method
 			int dummyTest = fileToCheckDummy.get(mapElement.getKey()).indexOf("!");
-			if(dummyTest != -1) {
-				substitutionDict(fileToCheckDummy.get(mapElement.getKey()));	
+			if(dummyTest == -1) {
+				String substitutionString = substitutionDict(fileToCheckDummy.get(mapElement.getKey()));
+				String letterOmissionString = letterOmission(fileToCheckDummy.get(mapElement.getKey()));
+				String letterInsertionString = letterInsertion(fileToCheckDummy.get(mapElement.getKey()));
+				String letterReversalString = letterReversal(fileToCheckDummy.get(mapElement.getKey()));
+				
+				System.out.println(letterReversalString);
 			}
 			
 		}
@@ -128,26 +133,252 @@ public class Spell {
 	
 	private String substitutionDict(String StringToTest) {
 		
-		// alphabet to be used
-		HashMap<String,Integer> alphabet = new HashMap<>();
-		for (char ch = 'a'; ch <= 'z'; ++ch) 
-			alphabet.put(String.valueOf(ch), 0); 
+		String origString = StringToTest;
 		
-		for(int i = 0; i < StringToTest.length();i++) {
-			for (Entry<String, Integer> entry : alphabet.entrySet()) {
-			    String letter = entry.getKey();
-			   System.out.println(letter);
-			    
-			    // Do things with the list
+		// alphabet to be used
+		HashMap<Character,Integer> alphabet = new HashMap<>();
+		for (char ch = 'a'; ch <= 'z'; ++ch) 
+			alphabet.put(ch, 0); 
+		
+		int i = 0;
+		
+		while(i < StringToTest.length()) {
+			
+			for(i = 0; i < StringToTest.length();i++) {
+				
+				//iterate through alphabet to make hashmap
+				for (Entry<Character, Integer> entry : alphabet.entrySet()) {
+				    Character letter = entry.getKey();
+				    String dummyString = StringToTest;
+				    StringBuilder finalString = new StringBuilder(dummyString);
+				    finalString.setCharAt(i, letter);
+				    
+				    
+				    //iterate through to see if in dictionary
+				    for( Entry<Integer, String> element : correctDict.entrySet()) {
+				    	String value = element.getValue();
+				    	Integer key = element.getKey();
+				    	if(value.equals(finalString.toString())) {
+				    		StringToTest = StringToTest + "?" + value;
+				    		
+				    	}
+				    }
+				   
+				}
 			}
+			
 		}
 		
-		return "djskd";
+		if(origString.equals(StringToTest)) {
+			return null;
+		}else {
+			return StringToTest;
+			
+		}
 		
 		
 	}
 	
 	
+	//Method that performs letter omission tasks
+	private String letterOmission(String StringToTest) {
+		
+		String origString = StringToTest;
+		
+		int i = 0;		
+		while(i < StringToTest.length()) {
+					//iterate through string to delete character
+					for(i = 0; i < StringToTest.length();i++) {
+						//remove letter from string
+						String testString = StringToTest;
+						StringBuilder dummyString = new StringBuilder(testString);
+						dummyString.deleteCharAt(i);
+					    //iterate through to see if in dictionary
+					    for( Entry<Integer, String> element : correctDict.entrySet()) {
+					    	String value = element.getValue();
+					    	Integer key = element.getKey();
+					    	if(value.equals(dummyString.toString())) {
+					    		StringToTest = StringToTest + "?" + value;
+					    		
+					    	}
+					    }
+						   
+						
+					}
+					
+				}
+		
+		if(origString.equals(StringToTest)) {
+			return null;
+		}else {
+			return StringToTest;
+			
+		}
+		
+	}
 	
-
+	
+	//letter insertion helper method to perform insertions in the beginning of letters
+	private String letterInsertionHelper(String StringToTest) {
+		
+		String origString = StringToTest;
+		
+		HashMap<Character,Integer> alphabet = new HashMap<>();
+		for (char ch = 'a'; ch <= 'z'; ++ch) 
+			alphabet.put(ch, 0); 
+		
+		int i = 0;
+		
+		while(i < StringToTest.length()) {
+			
+			for(i = 0; i < StringToTest.length();i++) {
+				
+				//iterate through alphabet to make hashmap
+				for (Entry<Character, Integer> entry : alphabet.entrySet()) {
+				    Character letter = entry.getKey();
+				    String dummyString = StringToTest;
+				    StringBuilder finalString = new StringBuilder(dummyString);
+				    
+				    if(i == 0) {
+				    	finalString.insert(i, letter);
+				    }else {
+				    	finalString.insert(i-1, letter);
+				    }
+				    
+				    
+				    
+				    //iterate through to see if in dictionary
+				    for( Entry<Integer, String> element : correctDict.entrySet()) {
+				    	String value = element.getValue();
+				    	Integer key = element.getKey();
+				    	if(value.equals(finalString.toString())) {
+				    		StringToTest = StringToTest + "?" + value;
+				    		
+				    	}
+				    }
+				   
+				}
+			}
+			
+		}
+		
+		if(origString.equals(StringToTest)) {
+			return null;
+		}else {
+			return StringToTest;
+			
+		}
+		
+		
+	}
+	
+	//Method to do letterInsertion at end of letters
+	private String letterInsertion(String StringToTest) {
+		String origString = StringToTest;
+		String testString = StringToTest;
+		// alphabet to be used
+		HashMap<Character,Integer> alphabet = new HashMap<>();
+		for (char ch = 'a'; ch <= 'z'; ++ch) 
+			alphabet.put(ch, 0); 
+		
+		int i = 0;
+		
+		while(i < StringToTest.length()) {
+			
+			for(i = 0; i < StringToTest.length();i++) {
+				
+				//iterate through alphabet to make hashmap
+				for (Entry<Character, Integer> entry : alphabet.entrySet()) {
+				    Character letter = entry.getKey();
+				    String dummyString = StringToTest;
+				    StringBuilder finalString = new StringBuilder(dummyString);
+				    finalString.insert(i+1, letter);
+				    
+				    
+				    
+				    //iterate through to see if in dictionary
+				    for( Entry<Integer, String> element : correctDict.entrySet()) {
+				    	String value = element.getValue();
+				    	Integer key = element.getKey();
+				    	if(value.equals(finalString.toString())) {
+				    		StringToTest = StringToTest + "?" + value;
+				    		
+				    	}
+				    }
+				   
+				}
+			}
+			
+		}
+		// pass to beginning of letter helper method
+		String finalTestString = letterInsertionHelper(testString);
+		
+		if(origString.equals(finalTestString + StringToTest)) {
+			return null;
+		}else {
+			if(finalTestString != null) {
+				return StringToTest + "?" + finalTestString;
+				
+			}else {
+				return StringToTest;
+			}
+			
+		}
+		
+	}
+	
+	
+	//Private method that swaps the two characters adjacent to eachother
+	private String letterReversal(String StringToTest) {
+		
+		
+		String origString = StringToTest;
+		
+		int i = 0;
+		
+		while(i < StringToTest.length()) {
+			
+			//iterate through string to delete character
+			for(i = 0; i < StringToTest.length();i++) {
+				//remove letter from string
+				String testString = StringToTest;
+				StringBuilder dummyString = new StringBuilder(testString);
+				
+				//swapping characters
+				if(i + 1 < StringToTest.length()) {
+					Character leftVal = dummyString.charAt(i);
+					Character rightVal = dummyString.charAt(i+1);
+					dummyString.setCharAt(i, rightVal);
+					dummyString.setCharAt(i+1, leftVal);
+					
+				}
+				
+			    //iterate through to see if in dictionary
+			    for( Entry<Integer, String> element : correctDict.entrySet()) {
+			    	String value = element.getValue();
+			    	Integer key = element.getKey();
+			    	if(value.equals(dummyString.toString())) {
+			    		StringToTest = StringToTest + "?" + value;
+			    		
+			    	}
+			    }
+				   
+				
+			}
+			
+		}
+		
+		
+		if(origString.equals(StringToTest)) {
+			return null;
+		}else {
+			return StringToTest;
+			
+		}
+		
+	}
+	
+	
+	
+	
 }

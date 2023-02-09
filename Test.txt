@@ -1,2 +1,2 @@
-John, Josh, Jim
+John, Josh, parent
 Carol, KK
