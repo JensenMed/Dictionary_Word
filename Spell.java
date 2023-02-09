@@ -51,7 +51,44 @@ public class Spell {
 				String letterInsertionString = letterInsertion(fileToCheckDummy.get(mapElement.getKey()));
 				String letterReversalString = letterReversal(fileToCheckDummy.get(mapElement.getKey()));
 				
-				System.out.println(letterReversalString);
+				HashMap<Integer, String> finalDict = new HashMap<Integer, String>();
+				
+				if(substitutionString != null) {
+					finalDict.put(0, substitutionString);
+				}
+				if(letterOmissionString != null) {
+					finalDict.put(1, letterOmissionString);
+				}
+				if(letterInsertionString != null) {
+					finalDict.put(2, letterInsertionString);
+				}
+				if(letterReversalString != null) {
+					finalDict.put(3, letterReversalString);
+				
+				}
+					
+				// just pass into for loop and should be good
+				for (Entry<Integer, String> entry : finalDict.entrySet()) {
+					String element = entry.getValue();
+					
+					
+				}
+//				
+//				String finalString = substitutionString + "?" +  letterOmissionString + "?" + letterInsertionString + "?" + letterReversalString;
+//				System.out.println(finalString);
+				
+//				for(int i = 0; i < finalString.length(); i++) {
+//					if(finalString.charAt(i) == '?') {
+//						
+//					}
+//				}
+				
+			} else {
+				
+				//prints out the output for the correct spelling
+				StringBuilder correctString = new StringBuilder(mapElement.getValue().toString());
+				correctString.deleteCharAt(dummyTest);
+				System.out.println(correctString.toString() + ":" + " Correct Spelling");
 			}
 			
 		}
@@ -159,7 +196,7 @@ public class Spell {
 				    	String value = element.getValue();
 				    	Integer key = element.getKey();
 				    	if(value.equals(finalString.toString())) {
-				    		StringToTest = StringToTest + "?" + value;
+				    		StringToTest = value;
 				    		
 				    	}
 				    }
@@ -198,7 +235,7 @@ public class Spell {
 					    	String value = element.getValue();
 					    	Integer key = element.getKey();
 					    	if(value.equals(dummyString.toString())) {
-					    		StringToTest = StringToTest + "?" + value;
+					    		StringToTest = value;
 					    		
 					    	}
 					    }
@@ -252,7 +289,7 @@ public class Spell {
 				    	String value = element.getValue();
 				    	Integer key = element.getKey();
 				    	if(value.equals(finalString.toString())) {
-				    		StringToTest = StringToTest + "?" + value;
+				    		StringToTest = value;
 				    		
 				    	}
 				    }
@@ -301,7 +338,7 @@ public class Spell {
 				    	String value = element.getValue();
 				    	Integer key = element.getKey();
 				    	if(value.equals(finalString.toString())) {
-				    		StringToTest = StringToTest + "?" + value;
+				    		StringToTest = value;
 				    		
 				    	}
 				    }
@@ -358,7 +395,7 @@ public class Spell {
 			    	String value = element.getValue();
 			    	Integer key = element.getKey();
 			    	if(value.equals(dummyString.toString())) {
-			    		StringToTest = StringToTest + "?" + value;
+			    		StringToTest = value;
 			    		
 			    	}
 			    }
