@@ -1,4 +1,14 @@
 
+/**
+ * This program is a simple spell-checker that takes in user input as a file and compares to dictionary file
+ * Jensen Medeiros 
+ * #251234023
+ * Assignment 2
+ * CS 2210B
+ * February 16, 2023
+ */
+
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -80,7 +90,7 @@ public class Spell {
     
     
     
-    // this function check if the dictionay is loaded or not
+    // This function check if the dictionay is loaded or not
     public static Hashtable<String, Boolean> getDictionary(){
     	return correctDict;    
     }
@@ -125,44 +135,7 @@ public class Spell {
 			
 			
 		}
-    
-	
-	
-	
-	
-	
-	
-	
-	
-//	private static Hashtable<String, Boolean> spellCheckerHelper(String dictionary, String fileToCheck) throws FileNotFoundException {
-//		Hashtable<String, Boolean> correctDictDummy = DictonaryOrganizer(dictionary);
-//		Hashtable<String, Boolean> fileToCheckDummy = fileToCheckOrganizer(fileToCheck);
-//		
-//		Iterator testDict = fileToCheckDummy.entrySet().iterator();
-//		
-//		
-//		// check if index of fileToCheckDummy is in dictonary
-//		for (Entry<String, Boolean> entry : fileToCheckDummy.entrySet()) {
-//			
-//			String mapElement = entry.getKey();
-//			Boolean mapKey = entry.getValue();
-//			
-//			if(correctDictDummy.get(mapElement) == null) {
-////				//Remove word from FileToCheckDummy
-//				fileToCheckDict.put(mapElement, false);
-//			}else {
-//				//store value of right word
-//				fileToCheckDict.put(mapElement, true);
-//			}
-//			
-//		}
-//		
-//		return fileToCheckDict;
-//		
-//	}
-	
-	
-	
+
 	private static Hashtable<String, Boolean> spellCheckerHelper(String dictionary, String fileToCheck) throws FileNotFoundException {
 		Hashtable<String, Boolean> correctDictDummy = DictonaryOrganizer(dictionary);
 		Hashtable<String, Boolean> fileToCheckDummy = fileToCheckOrganizer(fileToCheck);
@@ -195,16 +168,6 @@ public class Spell {
     // If the word exists, it will print it with a message "Incorrect Spelling:" to the console.
     // Else it will call the suggestCorrections function to provide the correct word from the words given in the dictionary file.
     public static boolean checkSpelling(String word) {
-//    	Boolean finalVal = false;
-//		try {
-//			Hashtable<String, Boolean> fileToCheckDummy = spellCheckerHelper(dictionary, fileToCheck);
-//			System.out.println(fileToCheckDummy);
-//			finalVal = fileToCheckDummy.get(word);
-//			return fileToCheckDummy.get(word);
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
     	Pattern digit = Pattern.compile("[0-9]");
     	Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
     	Matcher hasDigit = digit.matcher(word);
@@ -317,7 +280,6 @@ public class Spell {
 			
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
@@ -484,7 +446,7 @@ public class Spell {
 			
 			for(i = 0; i < StringToTest.length();i++) {
 				
-				//iterate through alphabet to make hashmap
+				//iterate through alphabet to make hashtable
 				for (Entry<Character, Integer> entry : alphabet.entrySet()) {
 				    Character letter = entry.getKey();
 				    String dummyString = StringToTest;
