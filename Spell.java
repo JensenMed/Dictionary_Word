@@ -27,8 +27,8 @@ public class Spell {
 	
 	private static Hashtable<String, Boolean> correctDict= new Hashtable<String, Boolean>();
 	private static Hashtable<String, Boolean> fileToCheckDict= new Hashtable<String, Boolean>();
-	private static String  fileToCheck= "C:\\\\Users\\\\Jensen Medeiros\\\\OneDrive\\\\Desktop\\\\CS2210\\\\Assignment_1\\\\src\\\\fileToCheck.txt";
-	private static String dictionary = "C:\\\\Users\\\\Jensen Medeiros\\\\OneDrive\\\\Desktop\\\\CS2210\\\\Assignment_1\\\\src\\\\dictionary.txt";
+	public static  String  fileToCheck = "C:\\Users\\Jensen Medeiros\\OneDrive\\Desktop\\CS2210\\Assignment_1\\src\\fileToCheck.txt";
+	public static  String dictionary = "C:\\Users\\Jensen Medeiros\\OneDrive\\Desktop\\CS2210\\Assignment_1\\src\\dictionary.txt";
 	
 
 
@@ -43,8 +43,22 @@ public class Spell {
     	
     }
 
-    public static void main(String[] args) {
-        Spell spell = new Spell();    		
+    public static void main(String[] args) throws FileNotFoundException {
+        if(args.length != 0) {
+        	for(String str : args){
+            	if(str.equals("dictionary.txt")) {
+            		dictionary = str;
+            	}else {
+            		fileToCheck = str;
+            	}
+            }
+        	
+        	Spell spellObj = new Spell();
+        	
+        }else {
+        	System.out.println("Please input a dictionary file and file to check");
+        }
+
     		
     }
     
